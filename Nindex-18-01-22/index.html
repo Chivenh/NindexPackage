@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>一些JS及CSS的小技巧解决大问题的经验</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="一些JS及CSS的小技巧解决大问题的经验" />
+    <meta name="keywords" content="JS,CSS,经验" />
+    <link rel="shortcut icon" href="/view/imgs/步行.png" />
+    <link rel="stylesheet" type="text/css" href="/view/css/index.css" media="all" />
+</head>
+
+<body>
+    <!-- 顶部吸附导航栏-->
+    <div class="_lock_top">
+        <ul class="_navgation">
+            <li data-href="/view/html/tab1.html">JSON加载展示</li>
+            <li data-href="/view/html/tab2.html"> 上传图片</li>
+            <li data-href="/lib/ueditor/index.html"> Ueditor-Demo</li>
+            <li data-href=""> 导 航 4</li>
+            <li data-href=""> 导 航 5</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="vertical-rl-con">
+        <div class="vertical-rl">一.这些文字将坚向展示</div>
+    </div>
+    <div class="liner-background-mine1">二.这里有一个渐变背景</div>
+    <div class="liner-background-mine2">二.这里有一个渐变背景</div>
+    <div class="clear"></div>
+    <div class="bg-15adf0">
+        <div class="opacity">三.这里的文字不会透明,但是背景将是透明的.</div>
+    </div>
+    <div class="bg-15adf0" id="_max_min">
+        <h4>求JS数组的最大值,最小值.</h4>
+        <input type="number" name="num" value="0">
+        <input type="number" name="num" value="0">
+        <input type="number" name="num" value="0">
+        <input type="number" name="num" value="0">
+        <input type="number" name="num" value="0">
+        <div>
+            <button>计算:</button>
+            <button id="_num_clear">清空:</button> 最大值 <input type="number" disabled id="max"> 最小值 <input type="number" disabled id="min">
+        </div>
+    </div>
+    <div class="entry_s">
+        <h1 class="_entry_title">简介</h1>
+        <img src="/view/imgs/步行.png" draggable="false" alt="" class="_img_title" /> “法者，天下之程式也，万事之仪表也。”我国现行宪法是1982年审议通过的，以国家根本法的形式，确立了一系列制度、原则和规则，制定了一系列大政方针，反映了我国各族人民共同意志和根本利益。30多年来的实践充分表明，我国宪法有力坚持了中国共产党领导，有力保障了人民当家作主，有力促进了改革开放和社会主义现代化建设，有力推动了社会主义法治国家建设进程，有力维护了国家统一、民族团结、社会稳定。
+    </div>
+    <div class="imgs_download">
+        <h4 style="padding-top:0;margin-top:0;letter-spacing: 2px;">图片展示 <button class="_load_imgs">重新加载</button> <button class="_do_upload_imgs">上传图片</button></h4>
+        <div class="_img_deal_res"></div>
+        <div class="imgs_container"></div>
+    </div>
+    <div class="_users_contanier">
+        <header>
+            <h2>用户信息 <button class="_users_load">重新加载</button> <button class="_users_add">添加用户</button></h2>
+        </header>
+        <div id="_users_add_con">
+            姓名:<input type="text" name="name">
+            代码:<input type="code" name="code">
+            密码:<input type="password" name="password">
+        </div>
+        <table id="users_grid">
+            <thead>
+                <th>序号</th>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>CODE</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
+                <th></th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="loopTitle" class="_loop_title"></div>
+    <div id="loopContainer">
+    </div>
+    <!-- 简单的实现回到顶部-->
+    <div class="back2top">
+        <div></div>
+    </div>
+    <script type="text/javascript" data-main="/view/js/index" src="/lib/requirejs/require.min.js"></script>
+</body>
+
+</html>

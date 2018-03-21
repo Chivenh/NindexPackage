@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>上传文件模块调试</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="一些JS及CSS的小技巧解决大问题的经验" />
+    <meta name="keywords" content="JS,CSS,经验" />
+    <link rel="shortcut icon" href="/view/imgs/步行.png" />
+    <link rel="stylesheet" type="text/css" href="/view/css/tab2.css" media="all" />
+</head>
+<body >
+	<div class="_contanier_">
+		<div class="_form_">
+		    <form  class="_upload_file" action="/uploadFile" method="post" enctype="multipart/form-data">
+		        <h3>单个文件上传</h3>
+		        <input type="file" name="mine" placeholder="上传文件">
+		        <button>上传</button>
+		    </form>
+		</div>
+	</div>
+	<div class="_contanier_">
+	    <div class="_form_">
+		    <form class="_upload_file" action="/uploadMultiFile" method="post" enctype="multipart/form-data">
+		        <h3>多个文件上传(最大上传文件数为 5 )</h3>
+		        <input type="file" multiple="true" size="5" accept="image/*" maxlength="5" name="mineFile" placeholder="上传文件">
+		        <button>上传</button>
+		    </form>
+		</div>
+	</div>
+	<div class="_contanier_">
+	    <div class="_form_ _upload_file_formdata" data-url="/uploadFile_formData">
+		        <h3>formData 上传单个文件</h3>
+		        <input type="file" accept="image/*" name="mine_single" placeholder="上传文件">
+		        <button>上传</button>
+		        <div class="_response"></div>
+		</div>
+	</div>
+    <div class="_contanier_">
+	    <div class="_form_ _upload_file_formdata" data-url="/uploadMultipart_formData">
+		        <h3>formData 上传多个文件(最大上传文件数为 5 )</h3>
+		        <input type="file" accept="image/*"  multiple="true" size="5" accept="image/*" maxlength="5" name="mine_multipart" placeholder="上传文件">
+		        <button>上传</button>
+		        <div class="_response"></div>
+		</div>
+	</div>
+	<div class="_contanier_">
+	    <div class="_form_ _upload_file_formdata_data" data-url="/uploadFile_formData_data">
+		        <h3>formData 上传单个文件(带数据)</h3>
+		        <div>附加值 :<input type="text" name="fileRef" class="_ext_data"></div>
+		        <input type="file" accept="image/*" name="mine_single" placeholder="上传文件">
+		        <button>上传</button>
+		        <div class="_response"></div>
+		</div>
+	</div>
+	<div class="_contanier_">
+	    <div class="_form_ _upload_file_formdata_preview" data-url="/uploadFile_formData_data">
+		        <h3>formData 上传单个文件(有预览)</h3>
+		        <input type="file" accept="image/*" name="mine_single" placeholder="上传文件">
+		        <button>上传</button>
+		        <div class="_response"></div>
+		</div>
+	</div>
+	<div class="_contanier_">
+	    <div class="_form_ _upload_file_formdata_preview" data-url="/uploadMultipart_formData">
+		        <h3>formData 上传多个文件(最大上传文件数为 5 [有预览])</h3>
+		        <input type="file" accept="image/*"  multiple="true" size="5" accept="image/*" maxlength="5" name="mine_multipart" placeholder="上传文件">
+		        <button>上传</button>
+		        <div class="_response"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+<script type="text/javascript" data-main="/view/js/tab2.js" src="/lib/requirejs/require.min.js"></script>
+</body>
+</html>

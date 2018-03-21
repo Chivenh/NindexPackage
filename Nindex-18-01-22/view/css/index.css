@@ -1,0 +1,527 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+}
+
+div {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+button {
+    cursor: pointer;
+}
+
+img,
+ul,
+li,
+a {
+    user-select: none;
+}
+
+.vertical-rl-con {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding-left: calc(50% - 20px);
+}
+
+.vertical-rl {
+    padding: 0 0;
+    margin: 0 0;
+    width: 20px;
+    writing-mode: vertical-rl;
+    writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+}
+
+.liner-background-mine1,
+.liner-background-mine2 {
+    width: calc(50% - 40px);
+    height: 100px;
+    line-height: 100px;
+    float: left;
+}
+
+.liner-background-mine1 {
+    background: -webkit-linear-gradient(#bdade6, #6af181, skyblue);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#bdade6, #6af181, skyblue);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#bdade6, #6af181, skyblue);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(#bdade6, #6af181, skyblue);
+    /* 标准的语法 */
+}
+
+.liner-background-mine2 {
+    background: -webkit-linear-gradient(#d0d738, #6af181, #b33ddc);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#d0d738, #6af181, #b33ddc);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#d0d738, #6af181, #b33ddc);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(#d0d738, #6af181, #b33ddc);
+    /* 标准的语法 */
+}
+
+.clear {
+    display: block;
+    clear: both;
+    width: 0;
+    height: 0;
+}
+
+.opacity {
+    background: transparent;
+    /**背景透明*/
+    background-color: rgba(9, 126, 85, 0.2);
+    /**背景颜色,最后一位为透明度0-1的值*/
+    border: none;
+    /**无边框*/
+    border-radius: 20px;
+    /**边框弧度*/
+    font-weight: bold;
+}
+
+.bg-15adf0 {
+    background: #15adf0;
+}
+
+.entry_s {
+    height: 200px;
+    background: #46aaaa;
+    padding: 40px;
+    padding-top: 50px;
+    font-size: 17px;
+    text-align: justify;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.entry_s::after {
+    display: block;
+    content: " ";
+    visibility: hidden;
+    clear: both;
+}
+
+._entry_title {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: calc(50% - 10px);
+}
+
+.back2top {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #194141;
+    transform: rotate(20deg);
+    text-align: center;
+    vertical-align: middle;
+    position: fixed;
+    right: 10px;
+    bottom: 5px;
+    cursor: pointer;
+}
+
+.back2top:hover {
+    transform: rotate(0deg);
+    background-color: #316072;
+}
+
+.back2top > div {
+    background-color: transparent;
+    border: 5px solid #050a17;
+    border-radius: 4px;
+    border-left: none;
+    border-bottom: none;
+    transform: rotate(-45deg);
+    width: 0px;
+    height: 0px;
+    margin: 25% auto;
+}
+
+._lock_top {
+    background-color: #395e99;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    position: relative;
+    height: 50px;
+    line-height: 100%;
+    vertical-align: middle;
+    width: 100%;
+}
+
+._lock_top._fixed {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+._navgation {
+    background-color: transparent;
+    display: block;
+    padding: 0;
+    margin: 1px;
+    height: calc(100%);
+}
+
+._navgation > li {
+    float: left;
+    display: block;
+    cursor: pointer;
+    list-style: none;
+    padding: 2px;
+    width: 140px;
+    height: calc(100%);
+    line-height: 45px;
+    vertical-align: middle;
+    color: #031f38;
+    text-shadow: 1px 1px 0 #a6d2fb;
+    word-spacing: 2px;
+}
+
+._navgation > li:hover {
+    background-color: #3a646a;
+    color: #fff;
+    text-shadow: none;
+}
+
+._tab_main {
+    background-color: #82c133;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+#_tab_ {
+    height: 100%;
+    line-height: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+#_tab_ li {
+    float: left;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 4px;
+    background-color: #a4ad2c;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#_tab_ li:hover {
+    background-color: #23e0c3;
+}
+
+/*图片展示区域*/
+
+.imgs_download {
+    background-color: #bbc7e6;
+    height: auto;
+    min-height: 200px;
+    position: relative;
+}
+
+.imgs_container {
+    width: 100%;
+    height: calc(100% - 30px);
+    text-align: left;
+}
+
+._img_show_con {
+    display: inline-block;
+    position: relative;
+    clear: both;
+    border-radius: 50%;
+}
+
+._img_del {
+    display: inline-block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -5px;
+    visibility: hidden;
+}
+
+._img_del::after {
+    content: "✘ ";
+    color: red;
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 15;
+    background-color: #dddbdb;
+    cursor: pointer;
+    right: 0;
+    padding: 2px;
+    border-radius: 11px;
+    text-align: center;
+}
+
+._img_show_con:hover > ._img_del {
+    visibility: visible;
+}
+
+._img_show_con:hover > ._img_show {
+    margin: 0 0;
+    border: 2px solid #0eafeb;
+    -webkit-box-shadow: 0 0 3px 2px #1bf43c, 0 0 3px 4px #901bf4;
+    box-shadow: 0 0 3px 2px #1bf43c, 0 0 3px 4px #901bf4;
+    border-radius: 50%;
+    width: 106px;
+    height: 106px;
+    -webkit-filter: contrast(130%);
+    filter: contrast(130%);
+}
+
+.imgs_download::before {
+    content: "拖动图片到上方区域中,可设置其为标题图片!";
+    display: block;
+    -webkit-transition: color 0.7s, background-color 0.5s;
+    -o-transition: color 0.7s, background-color 0.5s;
+    transition: color 0.7s, background-color 0.5s;
+    font-weight: bold;
+    font-size: 15px;
+    position: absolute;
+    bottom: 2px;
+    left: calc(50% - 80px);
+    z-index: 10;
+    padding: 3px;
+    border-radius: 13px;
+    text-shadow: 2px 1px 1px white;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    visibility: visible;
+    color: #0a40dd;
+    background-color: #ddddff94;
+    width: auto;
+}
+
+._img_show {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 4px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: box-shadow 1.2s, border-radius 1s, filter 1s;
+    -o-transition: box-shadow 1.2s, border-radius 1s, filter 1s;
+    transition: box-shadow 1.2s, border-radius 1s, filter 1s;
+}
+
+._img_title {
+    border-radius: 50%;
+    border-color: aqua #141bd0 #eee #2b88aa;
+    border-width: 2px;
+    border-style: solid;
+    float: left;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 5px;
+    padding: 4px;
+}
+
+._img_show._blur {
+    -webkit-filter: grayscale(90%) drop-shadow(16px 16px 10px #141313);
+    -o-filter: grayscale(90%) drop-shadow(16px 16px 10px #141313);
+    filter: grayscale(90%) drop-shadow(16px 16px 10px #141313);
+}
+
+._img_deal_res {
+    text-align: center;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 35px;
+    left: 250px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 1px #2180ef;
+}
+
+._users_contanier {
+    background-color: aqua;
+    min-height: 30px;
+    text-align: center;
+}
+
+#users_grid {
+    border: 1px solid grey;
+    border-spacing: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#users_grid td,
+#users_grid th {
+    padding: 2px;
+    border: 1px solid #aaa;
+}
+
+._users_contanier > header,
+._users_contanier > header > h2 {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+._users_contanier > header {
+    padding-bottom: 3px;
+}
+
+._user_del {
+    background: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*轮播图模块*/
+
+._loop_container {
+    width: auto;
+    min-width: 10rem;
+    height: auto;
+    min-height: 5rem;
+    background-attachment: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #fff;
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 30% 100%;
+    position: relative;
+}
+
+._loop_prev,
+._loop_next {
+    display: inline-block;
+    position: absolute;
+    font-style: normal;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    top: calc(50% - .5rem);
+    cursor: pointer;
+}
+
+._loop_prev {
+    left: 0;
+}
+
+._loop_next {
+    right: 3rem;
+}
+
+._loop_prev::before,
+._loop_next::before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    transform: rotate(45deg);
+    border: 2px solid #aaa;
+    line-height: 1rem;
+    white-space: nowrap;
+    background-color: transparent;
+    z-index: 1;
+}
+
+._loop_prev::before {
+    border-top: none;
+    border-right: none;
+}
+
+._loop_next::before {
+    border-bottom: none;
+    border-left: none;
+    background-color: transparent;
+}
+
+._loop_prev:hover::before,
+._loop_next:hover::before {
+    border-color: #86cee3;
+}
+
+._loop_prev::after,
+._loop_next::after {
+    content: "";
+    background-color: transparent;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    top: -.5rem;
+}
+
+._loop_prev::after {
+    left: -.8rem;
+}
+
+._loop_next::after {
+    left: -.3rem;
+}
+
+._loop_prev:hover::after,
+._loop_next:hover::after {
+    background-color: #eee;
+}
+
+._loop_title {
+    display: flex;
+    flex: 0 0 auto;
+    padding: 0;
+    margin: 0;
+    flex-wrap: nowrap;
+}
+
+._loop_title_item {
+    display: inline-block;
+    width: 80px;
+    font-style: normal;
+    cursor: pointer;
+    font-weight: bold;
+    color: #bbb;
+}
+
+._loop_title_item:hover,
+._loop_title_active {
+    color: #2bb8aa;
+}
+._loop_title_item:hover{
+    text-shadow: -1px 1px 0 #8ee5d4;
+}

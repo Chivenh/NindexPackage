@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+/**
+*@author LFH
+*@date 2018年1月22日
+*/
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-align: center;
+	width: calc(100% - 40px);
+}
+.clear{
+	clear:both;
+}
+#_main_,#_second_{
+	width:calc(50% - 15px);
+	float:left;
+	margin-left:15px;
+}
+#_main_{
+	text-align:center;
+}
+._item{
+	background-color: #abc;
+    padding:2px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border-bottom: 5px solid #248439;
+    cursor: pointer;
+    font-weight:bold;
+    text-align:justify;
+    border-radius:0 0 7px 7px;
+    padding-left:calc(40% + 10px);
+}
+._item:hover{
+    background-color: #23e0c3;
+    border-bottom:4px solid #274d81;
+    box-shadow:0 1px 1px yellow;
+    z-index:100;
+}
+._item_index{
+	color:yellow;
+	text-shadow:0 0 1px green;
+	margin:0 3px;
+}
