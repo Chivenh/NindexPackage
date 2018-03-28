@@ -1,0 +1,20 @@
+{
+  "name": "Nindex-18-03-28",
+  "version": "1.0.0",
+  "description": "Nindex-18-03-28",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Nindex"
+  ],
+  "author": "FlyTiger",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
