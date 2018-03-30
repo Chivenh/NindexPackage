@@ -61,10 +61,7 @@ var FireSpark = function () {
 
             draw() {
                 this.ctx.fillStyle = this.color;
-//                this.ctx.beginPath();
-//                this.ctx.arc(this.x * (1 - Math.pow(0.91, this.count)), this.y * (1 - Math.pow(0.91, this.count)),1.2,0,2*Math.PI);
                 this.ctx.fillRect(this.x * (1 - Math.pow(0.91, this.count)), this.y * (1 - Math.pow(0.91, this.count)), .9, .9);
-//                this.ctx.fill();
             }
         }
 
@@ -78,7 +75,7 @@ var FireSpark = function () {
                 this.speed = 10 + 10 * Math.random();
                 this.targetY = (.8 + Math.random()) / 2 * canvas.height; //爆炸高度
                 this.radius = 2 + 2 * Math.random();
-                this.color = '#' + (0xfffeee * Math.random() | 0).toString(16).padStart(6, '0');
+                this.color = '#' + (0xf7f2a6 * Math.random() | 0).toString(16).padStart(6, '0');
                 this.sparks = new Set(); //爆炸火花
                 this.die = () => {
                     this.dead = true;
@@ -135,7 +132,7 @@ var FireSpark = function () {
                 this.octx.textAlign = 'center';
                 this.octx.textBaseline = 'middle';
                 this.octx.fillStyle = 'rgba(255,255,255,1)';
-                this.octx.fillText(['新年快乐', '阖家欢乐', '万事如意', '心想事成', '恭喜发财'][parseInt(Math.random() * 5) | 0], x, y);
+                this.octx.fillText(['HAPPY NEW YEAR', '狗年大吉', '万事如意', '飞黄腾达', '财源广进'][parseInt(Math.random() * 5) | 0], x, y);
                 imageData = this.octx.getImageData(0, 0, this.ocanvas.width, this.ocanvas.height);
                 for (let j = 0; j < imageData.height; j += 4) {
                     for (let i = 0; i < imageData.width; i += 4) {
