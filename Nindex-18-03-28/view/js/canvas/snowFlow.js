@@ -11,9 +11,11 @@ var SnowFlow=function () {
         var Doing = {
             run() {
                 this.Day.bgc();
-                if(this.count<200){
-                    new Snow();
-                    this.count++;
+                if(this.count<150){
+                    setTimeout(() => {
+                        new Snow();
+                        this.count++;
+                    }, 200); // new Snow();
                   }
                   this.snows.forEach(si=>{
                       si.flow();
@@ -28,19 +30,21 @@ var SnowFlow=function () {
                 ctx.lineJoin="bevel";
                 var degs=[30,90,150,210,270,330];
                 var points=_arc.getPoints(...degs);
-                this.snowLine(points);
-                points.forEach(i=>{
+                this.snowLine(points);//画中心的花
+                points.forEach(i=>{//循环画每个角上的花.
                     let _arci=Tutil.Arc(i.x,i.y,_arc.r/2.2);
                     let ipoints=_arci.getPoints(...degs);
                     this.snowLine(ipoints);
                 });
-            },snowLine(points){
+            },
+            /**画雪花上的线条*/
+            snowLine(points){
                 var _start=points.slice(0,points.length/2);
                 var _stop=points.slice(points.length/2,points.length);
                 for(let i=0;i<_start.length;i++){
                     var _=_start[i],__=_stop[i];
                     ctx.save();
-                    ctx.moveTo(_.x,_.y);
+                    ctx.moveTo(_.x,_.y);//连接对角线.
                     ctx.lineTo(__.x,__.y);
                     ctx.stroke();
                     ctx.restore();
@@ -88,10 +92,7 @@ var SnowFlow=function () {
                 this.w=width;
                 this.h=height;
                 var bgColor= this.ctx.createLinearGradient(this.w/2,0,this.w/2,this.h);
-                bgColor.addColorStop(0,"#cbd1d8");
-                bgColor.addColorStop(0.2,"#caddf0");
-                bgColor.addColorStop(0.8,"#caddf0");
-                bgColor.addColorStop(1,"#7dd8f4");
+                Tutil.addColor(bgColor,[0,"#cbd1d8"],[0.2,"#caddf0"],[0.8,"#caddf0"],[1,"#7dd8f4"]);
                 this.bgColor=bgColor;
             }
             bgc(){

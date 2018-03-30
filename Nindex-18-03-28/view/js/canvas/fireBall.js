@@ -73,7 +73,9 @@ var FireBall=function () {
                 /**创建散射状渐变颜色,和对应圆形一致*/
                 var radgrad = ctx.createRadialGradient(this.x, this.y, Int(this.radius / 2), this.x, this.y, this.radius);
                 radgrad.addColorStop(0, `rgba(255,${this.g },0,${this.opacity })`);
-                radgrad.addColorStop(0.5, "rgb(221, 111, 78)");
+                radgrad.addColorStop(0.3, "rgb(224, 146, 97)");
+                radgrad.addColorStop(0.6, "rgb(221, 111, 78)");
+                radgrad.addColorStop(0.8, "rgb(227, 95, 55)");
                 radgrad.addColorStop(1, "rgb(255,0,0)");
                 ctx.fillStyle = radgrad;
                 ctx.fill();

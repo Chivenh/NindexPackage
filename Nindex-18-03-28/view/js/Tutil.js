@@ -13,7 +13,7 @@ var Tutil=function($){
         var width = $cv.width();
         var height = $cv.height();
         var canvas = $cv[0];
-        /**这一步是指定canvas元素的width和height属性等同于样式中的width和height*/
+        /**这一步是指定canvas元素的width和height属性,让其等于样式中的width和height*/
         canvas.width = width;
         canvas.height = height;
         var ctx = canvas.getContext("2d");
@@ -57,5 +57,13 @@ var Tutil=function($){
         }
         return (x, y, r) => new _Arc(x, y, r);
     }();
-    return {Random,Float,Int,getCanvas,Arc};
+    /**以便于批量添加渐变颜色的梯度值*/
+    var addColor=(gradient,...color)=>{
+        if(color&&color.length){
+            color.forEach(ci=>gradient.addColorStop(ci[0],ci[1]));
+        }
+        return gradient;
+    };
+    
+    return {Random,Float,Int,getCanvas,Arc,addColor};
 }(jQuery);

@@ -18,6 +18,10 @@ require(["./config"], function () {
         snowFlow() {
             /**满天雪飘*/
             SnowFlow("#canvas-3").start();
+        },
+        rainFlow() {
+            /**雨落天穹*/
+            RainFlow("#canvas-4").start();
         }
     };
     var deps=["jquery", "Tutil","header"];
