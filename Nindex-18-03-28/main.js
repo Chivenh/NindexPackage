@@ -12,10 +12,5 @@ process.on('uncaughtException', (err) => {
     }, 3000);
 });
 
-/**
- *./js/my/myUpload",//文件上传模块
- *./js/my/myFileDeal,//文件处理模块
- *./js/my/myDataBase//数据库模块
- */
 var myPath = "./js/my/";
 

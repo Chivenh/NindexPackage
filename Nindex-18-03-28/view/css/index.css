@@ -1,0 +1,44 @@
+/**
+*@author LFH
+*@date 2018年03月29日 09:10
+*/
+@charset utf-8;
+body,html,*{
+    margin: 0;
+    height: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    text-align: center;
+}
+body{
+    padding:35px 5px 5px 3px;
+}
+.container{
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+            flex-direction: column;
+    height: auto;
+    min-height: 570px;
+}
+.container>canvas{
+    height: 550px;
+    background: rgb(53, 54, 48);
+    overflow: hidden;
+}
+.header{
+    font-size: 18px;
+    font-weight: bold;
+    color: rebeccapurple;
+    display: inline-block;
+    height: 32px;
+    width:100%;
+    position: fixed;
+    top:0;
+    left:0;
+}
