@@ -115,7 +115,7 @@ var RainFlow=function () {
                 this.w=width;
                 this.h=height;
                 var bgColor= this.ctx.createLinearGradient(this.w/2,0,this.w/2,this.h);
-                Tutil.addColor(bgColor,[0,"#b0b4b9"],[0.2,"#b9d9f8"],[0.9,"#caddf0"],[1,"#7dd8f4"]);
+                Tutil.addColor(bgColor,[0,"#1f334d"],[0.2,"#45302b"],[0.9,"#caddf0"],[1,"#92cadb"]);
                 this.bgColor=bgColor;
             }
             bgc(){

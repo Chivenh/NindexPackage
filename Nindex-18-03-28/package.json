@@ -15,6 +15,7 @@
   "author": "FlyTiger",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "pg": "^7.4.1"
   }
 }

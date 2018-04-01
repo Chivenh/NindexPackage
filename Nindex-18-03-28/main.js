@@ -12,5 +12,9 @@ process.on('uncaughtException', (err) => {
     }, 3000);
 });
 
-var myPath = "./js/my/";
+var myPath = "./js/server/";
+var mines=["save"];//加载息的模块.
+mines.forEach(i=>{
+    require(myPath+i)(Nindex);
+});
 

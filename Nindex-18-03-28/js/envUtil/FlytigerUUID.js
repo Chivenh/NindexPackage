@@ -76,5 +76,9 @@ UUID.prototype.createUUID = function () {
         getIntegerBits(rand(8191), 0, 15); // this last number is two octets long
     return tl + tm + thv + csar + csl + n;
 };
-
-module.exports = new UUID();
+var  _uuid=new UUID();
+module.exports = {
+    getID() {
+        return _uuid.createUUID();
+    }
+};

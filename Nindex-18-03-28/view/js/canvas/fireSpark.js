@@ -132,7 +132,7 @@ var FireSpark = function () {
                 this.octx.textAlign = 'center';
                 this.octx.textBaseline = 'middle';
                 this.octx.fillStyle = 'rgba(255,255,255,1)';
-                this.octx.fillText(['HAPPY NEW YEAR', '狗年大吉', '万事如意', '飞黄腾达', '财源广进'][parseInt(Math.random() * 5) | 0], x, y);
+                this.octx.fillText(['HAPPY NEW YEAR', '狗年大吉', '万事如意', '飞黄腾达', '财源广进'][Math.random() * 5 | 0], x, y);
                 imageData = this.octx.getImageData(0, 0, this.ocanvas.width, this.ocanvas.height);
                 for (let j = 0; j < imageData.height; j += 4) {
                     for (let i = 0; i < imageData.width; i += 4) {

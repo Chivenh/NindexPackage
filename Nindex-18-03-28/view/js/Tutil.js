@@ -64,6 +64,29 @@ var Tutil=function($){
         }
         return gradient;
     };
-    
-    return {Random,Float,Int,getCanvas,Arc,addColor};
+    /**获取指定区域的所有像素点
+     * @param ctx //canvas操作对象
+     * @param {x,y,w,h} //矩形区域的范围.
+     * @return {imageData,points} //返回图像对象和像素点.
+     */
+    var getPoints = (ctx, x,y,w,h) => {
+        var imageData = ctx.getImageData(x, y, w, h),data=imageData.data,points = [];
+        var _w = w / 2,_h = h / 2;
+        var height=imageData.height,width=imageData.width;
+        console.info(data);
+        for (let j = 0; j < height; j += 1) {
+            points.push(Array(width));
+            for (let i = 0; i < width; i += 1) {
+                let index=(j*width+i)*4;
+                points[j]=new Uint8ClampedArray(4);
+                points[j][3]=data[index+3];
+                points[j][2]=data[index+2];
+                points[j][1]=data[index+1];
+                points[j][0]=data[index];
+            }
+        }
+
+        return {imageData,points};
+    };
+    return {Random,Float,Int,getCanvas,Arc,addColor,getPoints};
 }(jQuery);
