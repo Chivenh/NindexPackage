@@ -22,7 +22,7 @@ var Tutil=function($){
         
         return {ctx,width,height};
     };
-    var Arc = function(x, y, r){
+    var Arc = function(){
         /**创建一个圆周对象,以方便获取圆周上点坐标*/
         class _Arc {
             constructor(x, y, r) {
@@ -64,29 +64,103 @@ var Tutil=function($){
         }
         return gradient;
     };
-    /**获取指定区域的所有像素点
-     * @param ctx //canvas操作对象
-     * @param {x,y,w,h} //矩形区域的范围.
-     * @return {imageData,points} //返回图像对象和像素点.
-     */
-    var getPoints = (ctx, x,y,w,h) => {
-        var imageData = ctx.getImageData(x, y, w, h),data=imageData.data,points = [];
-        var _w = w / 2,_h = h / 2;
-        var height=imageData.height,width=imageData.width;
-        console.info(data);
-        for (let j = 0; j < height; j += 1) {
-            points.push(Array(width));
-            for (let i = 0; i < width; i += 1) {
-                let index=(j*width+i)*4;
-                points[j]=new Uint8ClampedArray(4);
-                points[j][3]=data[index+3];
-                points[j][2]=data[index+2];
-                points[j][1]=data[index+1];
-                points[j][0]=data[index];
+        
+    var ImgPoints=function(){
+        /**扩展数组类,以对应此操作对象方便数据匹配*/
+        class Points extends Array{
+            constructor(points){
+                super(...points);
             }
         }
-
-        return {imageData,points};
-    };
-    return {Random,Float,Int,getCanvas,Arc,addColor,getPoints};
+        /**获取像素点,存入对象中*/
+        let _getPoints=function(){
+            let points=[],opt=this.options;
+                for (let j = 0; j < opt.height; j += opt.grad) {
+                    points.push(Array(opt.wlength));
+                    for (let i = 0; i < opt.width; i += opt.grad) {
+                        let index = (j * opt.width + i) * 4;
+                        let _j = j / opt.grad,
+                            _i = i / opt.grad;
+                        if (opt.data[index + 3]) {
+                            let _ai = new Uint8ClampedArray(4);
+                            _ai[3] = opt.data[index + 3];
+                            _ai[2] = opt.data[index + 2];
+                            _ai[1] = opt.data[index + 1];
+                            _ai[0] = opt.data[index];
+                            let xy = {
+                                x: i * opt.rt + opt.x + opt.fx,
+                                y: j * opt.rt + opt.y + opt.fy,
+                                rad: opt.rt,
+                                color: `rgba(${_ai[0]},${_ai[1]},${_ai[2]},${(_ai[3]/255)})`
+                            };
+                            points[_j][_i] = [..._ai, xy];
+                        }
+                    }
+                }
+                this.points=new Points(points);
+                this.options.hlength=this.points.length;
+                
+        };
+        /**获取指定区域的所有像素点
+         * @param ctx //canvas操作对象
+         * @param {x,y,w,h} //矩形区域的范围.
+         * @param rt //获得坐标时的放大倍数.
+         * @param grad //粒度
+         * @param fx,fy 分别为x轴和y轴的偏移量.
+         * @return {imageData,points} //返回图像对象和像素点.
+         */
+        class ImgPxies {
+            constructor(ctx, {x,y,w,h}, {grad = 1,rt = 1,fx = 0,fy = 0}) {
+                let imageData = ctx.getImageData(x, y, w, h),
+                    data = imageData.data,
+                    height = imageData.height,
+                    width = imageData.width,
+                    wlength = Math.ceil(width / grad);
+                grad = grad | 0;
+                rt = Math.abs(rt);
+                this.options={ctx,imageData,data,x,y,grad,rt,height,width,wlength,fx,fy};
+                _getPoints.call(this);
+            }
+            /**获取像素数据*/
+            getPoints() {
+                return {
+                    imageData: this.options.imageData,
+                    points: this.points
+                };
+            }/**以矩形来绘制像素*/
+            drawByRect(points = this.points) {
+                let ctx = this.options.ctx;
+                if (points instanceof Points) {
+                    points.forEach(j => {
+                        j.forEach(i => {
+                            let _px = i[4];
+                            ctx.beginPath();
+                            ctx.fillStyle = _px.color;
+                            ctx.fillRect(_px.x - _px.rad / 2, _px.y - _px.rad / 2, _px.rad, _px.rad);
+                            ctx.closePath();
+                        });
+                    });
+                }
+            }
+            /**以圆形来绘制像素*/
+            drawByArc(points = this.points) {
+                let ctx = this.options.ctx;
+                if (points instanceof Points) {
+                    points.forEach(j => {
+                        j.forEach(i => {
+                            let _px = i[4];
+                            ctx.beginPath();
+                            ctx.fillStyle = _px.color;
+                            ctx.arc(_px.x, _px.y, _px.rad / 2, 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.closePath();
+                        });
+                    });
+                }
+            }
+        }
+        return (ctx,img,opts)=>new ImgPxies(ctx,img,opts);
+    }();
+    
+    return {Random,Float,Int,getCanvas,Arc,addColor,ImgPoints};
 }(jQuery);

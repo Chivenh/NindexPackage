@@ -4,9 +4,23 @@ pg.getConnection({
     name: "myNode-1"
 });
 let uuid = require("../envUtil/FlyTigerUUID");
-
+let fs=require("fs");
+/**图像信息保存根目录*/
+let baseImgdataPath="view/imgData/";
+/**将图像信息写入文件*/
+let saveData=({name,data,flag})=>{
+    /**appendFile 第3个参数 
+     *@see flag 有值:
+     * a append
+     * w write
+     * */
+    fs.appendFile(`${baseImgdataPath}${name}.txt`, data,{flag:flag}, (err) => {
+          if (err) {throw err;}
+          console.log('The imgData was appended to file!');
+        });
+};
 let _init = (Nindex) => {
-    /**保存canvas中的数据(同名记录已存在则修改!)*/
+    /**保存canvas中的基本数据(同名记录已存在则修改!)*/
     Nindex.post("/canvas.do", (req, res) => {
         let _body = req.body;
         let _content = {
@@ -33,6 +47,11 @@ let _init = (Nindex) => {
             }
         });
 
+    });
+    Nindex.post("/canvas-img.do",(req,res)=>{
+        let _body = req.body;
+        saveData(_body);
+        res.send(true);
     });
 };
 

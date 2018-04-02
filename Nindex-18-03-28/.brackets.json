@@ -17,6 +17,7 @@
         "/.settings/",
         "/lib/",
         "/bin/",
-        "/envUtil/"
+        "/envUtil/",
+        "/view/imgData/"
     ]
 }

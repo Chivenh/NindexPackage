@@ -9,8 +9,9 @@ var Nindex = express();
 
 /**此两行代码必须写在下面所有路由的前面*/
 Nindex.use(bodyParser.json()); // for parsing application/json
-Nindex.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
+/** for parsing application/x-www-form-urlencoded 
+ *  and set post body limit size;*/
+Nindex.use(bodyParser.urlencoded({ extended: true ,limit:"10mb"})); 
 /**将下面两个目录的资源设置为静态资源*/
 Nindex.use("/view",express.static('view'));
 Nindex.use("/lib",express.static('lib'));

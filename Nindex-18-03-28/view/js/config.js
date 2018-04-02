@@ -26,9 +26,9 @@ define([],function(){
             /**雨落天穹*/
             RainFlow("#canvas-4").start();
         },
-        sunMoon() {
-            /**日月轮转*/
-            SunMoon("#canvas-5").start();
+        imgDeal() {
+            /**图像处理*/
+            ImgDeal("#canvas-5").start();
         }
     };
 });

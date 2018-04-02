@@ -61,7 +61,7 @@ var FireSpark = function () {
 
             draw() {
                 this.ctx.fillStyle = this.color;
-                this.ctx.fillRect(this.x * (1 - Math.pow(0.91, this.count)), this.y * (1 - Math.pow(0.91, this.count)), .9, .9);
+                this.ctx.fillRect(this.x * (1 - Math.pow(0.81, this.count)), this.y * (1 - Math.pow(0.81, this.count)), .9, .9);
             }
         }
 
@@ -134,8 +134,8 @@ var FireSpark = function () {
                 this.octx.fillStyle = 'rgba(255,255,255,1)';
                 this.octx.fillText(['HAPPY NEW YEAR', '狗年大吉', '万事如意', '飞黄腾达', '财源广进'][Math.random() * 5 | 0], x, y);
                 imageData = this.octx.getImageData(0, 0, this.ocanvas.width, this.ocanvas.height);
-                for (let j = 0; j < imageData.height; j += 4) {
-                    for (let i = 0; i < imageData.width; i += 4) {
+                for (let j = 0; j < imageData.height; j += 2) {
+                    for (let i = 0; i < imageData.width; i += 2) {
                         let index = (j * imageData.width + i) * 4;
 
                         if (imageData.data[index + 3]) { //非完全透明的点
@@ -157,8 +157,8 @@ var FireSpark = function () {
                 this.$canvas=$(container);
                 this.ctx = this.canvas.getContext('2d');
                 this.ocanvas = document.createElement('canvas'); //创建离屏的canvas
-                this.ocanvas.width = 100;
-                this.ocanvas.height = 100;
+                this.ocanvas.width = 130;
+                this.ocanvas.height = 120;
                 this.octx = this.ocanvas.getContext('2d');
                 this.fireworks = new Set();
                 this.addEventListener();
