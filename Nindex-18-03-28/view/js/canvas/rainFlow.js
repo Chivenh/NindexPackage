@@ -28,13 +28,13 @@ var RainFlow=function () {
                 this.x = x;
                 this.y = y;
                 this.radius = Random(1, 3);
-                this.color =0x58595a;
+                this.color =0x3b3a3a;
                 this.draw();
                 Doing.rainArcs.add(this);
             }
             diffuse() {
                 this.radius *= 1.1;
-                this.color+=2;
+                this.color+=1;
                 if (this.radius > 13) {
                     this.die();
                 } else {
@@ -45,7 +45,7 @@ var RainFlow=function () {
                 Doing.rainArcs.delete(this);
             }
             draw() {
-                /*this.color=(this.color+)|0;//此运算相当于对结果取整.*/
+                /*this.color=(this.color*2)|0;//此运算相当于对结果取整.*/
                 /**
                  * this.color.toString(16) 是将值转为16进制.
                  * padStart(6,'0') 是对结果值取6位,如果不足6位则在前面补'0';

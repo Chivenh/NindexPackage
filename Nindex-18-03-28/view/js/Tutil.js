@@ -64,7 +64,7 @@ var Tutil=function($){
         }
         return gradient;
     };
-        
+    /**图像处理工具类*/    
     var ImgPoints=function(){
         /**扩展数组类,以对应此操作对象方便数据匹配*/
         class Points extends Array{
@@ -87,6 +87,11 @@ var Tutil=function($){
                             _ai[2] = opt.data[index + 2];
                             _ai[1] = opt.data[index + 1];
                             _ai[0] = opt.data[index];
+                            if(opt.isReverse){//反转颜色.
+                                _ai[0]=255-_ai[0];
+                                _ai[1]=255-_ai[1];
+                                _ai[2]=255-_ai[2];
+                            }
                             let xy = {
                                 x: i * opt.rt + opt.x + opt.fx,
                                 y: j * opt.rt + opt.y + opt.fy,
@@ -110,7 +115,7 @@ var Tutil=function($){
          * @return {imageData,points} //返回图像对象和像素点.
          */
         class ImgPxies {
-            constructor(ctx, {x,y,w,h}, {grad = 1,rt = 1,fx = 0,fy = 0}) {
+            constructor(ctx, {x,y,w,h}, {grad = 1,rt = 1,fx = 0,fy = 0,isReverse=false}) {
                 let imageData = ctx.getImageData(x, y, w, h),
                     data = imageData.data,
                     height = imageData.height,
@@ -118,7 +123,8 @@ var Tutil=function($){
                     wlength = Math.ceil(width / grad);
                 grad = grad | 0;
                 rt = Math.abs(rt);
-                this.options={ctx,imageData,data,x,y,grad,rt,height,width,wlength,fx,fy};
+                this.options={ctx,imageData,data,
+                              x,y,grad,rt,height,width,wlength,fx,fy,isReverse};
                 _getPoints.call(this);
             }
             /**获取像素数据*/
@@ -127,36 +133,49 @@ var Tutil=function($){
                     imageData: this.options.imageData,
                     points: this.points
                 };
-            }/**以矩形来绘制像素*/
-            drawByRect(points = this.points) {
-                let ctx = this.options.ctx;
+            }
+            /**以矩形来绘制像素
+             *@param split 是否分割任务 */
+            drawByRect({ctx=this.options.ctx,points = this.points},split=false) {
+                var doing=split?setTimeout:(fn)=>{fn();};
                 if (points instanceof Points) {
                     points.forEach(j => {
-                        j.forEach(i => {
-                            let _px = i[4];
-                            ctx.beginPath();
-                            ctx.fillStyle = _px.color;
-                            ctx.fillRect(_px.x - _px.rad / 2, _px.y - _px.rad / 2, _px.rad, _px.rad);
-                            ctx.closePath();
+                        doing(() => {
+                            j.forEach(i => {
+                                let _px = i[4];
+                                ctx.beginPath();
+                                ctx.fillStyle = _px.color;
+                                ctx.fillRect(_px.x - _px.rad / 2, _px.y - _px.rad / 2, _px.rad, _px.rad);
+                                ctx.closePath();
+                            });
                         });
                     });
                 }
             }
-            /**以圆形来绘制像素*/
-            drawByArc(points = this.points) {
-                let ctx = this.options.ctx;
+            /**以圆形来绘制像素
+             * @param splid 是否分割任务*/
+            drawByArc({ctx = this.options.ctx,points = this.points},split=false) {
+                var doing=split?setTimeout:(fn)=>{fn();};
                 if (points instanceof Points) {
                     points.forEach(j => {
-                        j.forEach(i => {
-                            let _px = i[4];
-                            ctx.beginPath();
-                            ctx.fillStyle = _px.color;
-                            ctx.arc(_px.x, _px.y, _px.rad / 2, 0, 2 * Math.PI);
-                            ctx.fill();
-                            ctx.closePath();
+                        doing(() => {
+                            j.forEach(i => {
+                                let _px = i[4];
+                                ctx.beginPath();
+                                ctx.fillStyle = _px.color;
+                                ctx.arc(_px.x, _px.y, _px.rad / 2, 0, 2 * Math.PI);
+                                ctx.fill();
+                                ctx.closePath();
+                            });
                         });
                     });
                 }
+            }
+            /**合并多个点集合.*/
+            mergePoints(...points){
+                var _=[];
+                points.forEach(_i=>{_=_.concat(_i);});
+                return new Points(_);
             }
         }
         return (ctx,img,opts)=>new ImgPxies(ctx,img,opts);

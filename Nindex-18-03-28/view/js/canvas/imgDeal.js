@@ -6,66 +6,110 @@ var ImgDeal=function () {
         if(!ctx){
             return {start(){},stop(){}};
            }
-        /**启动绘图*/
-        var Doing = {
-            run() {
-                this.day.bgc();
-                if(this.count<10){
-                    new Soup();
-                }
-                this.soups.forEach(si=>si.move());
-            },
-            soups: new Set(),
-            count: 0
-        };
-        class Soup {
-            constructor(){
-                this.x=-10;
-                this.y=height-30;
-                this.radius=Random(5,10)|0;
-                Doing.soups.add(this);
-            }
-            move(){
-                this.x+=2;
-                if(this.x>width+this.radius){
-                        this.die();
-                   }else{
-                       this.draw();
-                   }
-            }
-            draw(){
-//                ctx.beginPath();
-            }
-            die(){
-                Doing.soups.delete(this);
-                new Soup();
-            }
-        }
-        
+        let colorLoop;//颜色循环绘画.
        class NiceDay {
             constructor(){
+                let ocanvas=document.createElement("canvas");
+                this.ow=ocanvas.width=1000;
+                this.oh=ocanvas.height=1000;
+                this.octx=ocanvas.getContext("2d");
+                this.octx.globalCompositeOperation="lighter";
                 this.ctx=ctx;
+                this.ctx.globalCompositeOperation="lighter";
                 this.w=width;
                 this.h=height;
                 var img1=document.querySelector("#img1");
                 var img2=document.querySelector("#img2");
-                this.img1={x:0,y:0,w:img1.width,h:img1.height};
-                this.img2={x:0,y:0,w:img2.width,h:img2.height};
+                this.img1={x:0,y:0,w:img1.width,h:img1.height,img:img1};
+                this.img2={x:img1.width+1,y:0,w:img2.width,h:img2.height,img:img2};
                 this.bgColor="#566b80";
+                this.drawImg(img2,this.img2);
                 this.drawImg(img1,this.img1);
             }
-            bgc(){
-                
+            *bgc(){
+                let color=0x3b3a3a;
+                let count=50;
+                let x=500,y=0;
+                let _cps=function _(s=[],v){
+                    if(v>0){
+                        return _([...s,v],--v);
+                       }
+                      return s; 
+                }([],360);
+                let _getPoints=function(...colorArc){
+                    let _=[];
+                    colorArc.forEach(i=>{
+                        if(!i){
+                            _=_.concat(false);
+                            return;
+                        }
+                        _=_.concat(i.getPoints(..._cps));
+                    });
+                    return _;
+                };
+                let step=4,sr=0,{colorArcs,_r}=function _(r,s,t){
+                    if(r>200){
+                        return {colorArcs:s,_r:r};
+                    }
+                    if(r<10){
+                        r+=step;
+                        step=-4;
+                        sr=1;
+                        s=s.concat(false);
+                       }
+                    s=s.concat(Tutil.Arc(t.width*.9*1.5+1,t.height*.9/2,r-sr));
+                    r-=step;
+                    return _(r,s,t);
+                }(200,[],this.img1.img);
+                let arcPoints=_getPoints(...colorArcs);//获取每一个角度的坐标.
+                setTimeout(()=>{
+                    this.getContent();
+                },100);
+                let _rad=1.5;
+                let _time=new Date().getTime();
+                console.time("生成耗时");
+                for(let xyi in arcPoints){
+                    yield setTimeout((xy)=>{
+                        if(!xy){
+                                _rad=1;
+                                color=0x3b3a3a;
+                            return colorLoop.next();
+                           }
+                        this.ctx.beginPath();
+                        this.ctx.fillStyle='#' + color.toString(16).padStart(6, '0');
+                        this.ctx.arc(xy.x,xy.y,_rad,0,2*Math.PI);
+                        this.ctx.fill();
+                        this.ctx.closePath();
+                        color=color+205;
+                        colorLoop.next();
+                    },0,arcPoints[xyi]);
+                }
+                yield function(){console.timeEnd("生成耗时"); alert("生成耗时: "+(new Date().getTime()-_time)+" ms")}();
             }
            getContent(){
-               let imgPointsObj=Tutil.ImgPoints(ctx,this.img1,{rt:.9,fx:50});
-               let imgData=imgPointsObj.getPoints();
-               ctx.clearRect(0,0,this.w,this.h);
-               imgPointsObj.drawByArc();
-               return imgData;
+               let imgPointsObj1=Tutil.ImgPoints(this.octx,this.img1,{rt:.9,fx:10});
+               let imgPointsObj2=Tutil.ImgPoints(this.octx,this.img2,{rt:.7,fx:400-this.img1.img.width*.1+25,fy:100});
+               let imgData1=imgPointsObj1.getPoints();
+               let imgData2=imgPointsObj2.getPoints();
+               this.octx.clearRect(0,0,this.ow,this.oh);
+               imgData2.points.forEach((j,index) => {
+                    imgData2.points[index]=j.map((i) => {
+                       if (i[0]==255&&i[1]==255&&i[2]==255&&i[3]===255){
+                                i[4].color="rgba(255,255,255,0)";
+                           }else if(i[0]==0&&i[1]==0&&i[2]==0){
+                                        i[0]=48;
+                                        i[1]=64;
+                                        i[2]=134;
+                                    }
+                       return i;
+                   });
+               });
+               imgPointsObj1.drawByArc({ctx:this.ctx},true);
+               imgPointsObj2.drawByArc({ctx:this.ctx,points:imgData2.points},true);
+               return {};
            }
            drawImg(img,{x,y,w,h}){
-               ctx.drawImage(img,x,y,w,h);
+               this.octx.drawImage(img,x,y,w,h);
            }
         };
         
@@ -94,32 +138,30 @@ var ImgDeal=function () {
         
         return {
             start() {
-                Doing.day=new NiceDay();
+                let day=new NiceDay();
                 var _this=this;
-                ! function animate() {
-                    Doing.run();
-                    _this._r = requestAnimationFrame(animate);
-                }();
                 this.started=true;
-                setTimeout(function () {
-                    var content=Doing.day.getContent();
-                    $.post("/canvas.do", {
-                        content: {
-                            width: content.imageData.width,
-                            height: content.imageData.height
-                        },
-                        name: "SunMoon"
-                    }).done(data => {
-                        console.info(data);
-                    });
-                    /**将图片像素信息发往服务器.*/
-//                   doSendImg=sendImg(content);//分次发送数据的方法.
-//                    doSendImg.next();//依次执行.
-                },100);
+//                 setTimeout(function () {
+//                    var content=day.getContent();
+//                    $.post("/canvas.do", {
+//                        content: {
+//                            width: content.imageData.width,
+//                            height: content.imageData.height
+//                        },
+//                        name: "SunMoon"
+//                    }).done(data => {
+//                        console.info(data);
+//                    });
+//                    /**将图片像素信息发往服务器.*/
+////                   doSendImg=sendImg(content);//分次发送数据的方法.
+////                    doSendImg.next();//依次执行.
+//                },100);
+                colorLoop=day.bgc();
+                colorLoop.next();
+                
                 return this;
             },
             stop(){
-                cancelAnimationFrame(this._r);
                  this.started=false;
             }
         };
