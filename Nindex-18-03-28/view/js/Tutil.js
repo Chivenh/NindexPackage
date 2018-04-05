@@ -22,8 +22,8 @@ var Tutil=function($){
         
         return {ctx,width,height};
     };
+    /**创建一个圆周对象,以方便获取圆周上点坐标*/
     var Arc = function(){
-        /**创建一个圆周对象,以方便获取圆周上点坐标*/
         class _Arc {
             constructor(x, y, r) {
                 this.x = x;
@@ -35,12 +35,14 @@ var Tutil=function($){
                 this._x = this.x + Math.sin(deg) * this.r;
                 this._y = this.y + Math.cos(deg) * this.r;
             }
+            /**指定角度获取点*/
             getPoint(v) {
                 var deg = (2 * Math.PI / 360) * v;
                 var x = Float(this.x + Math.sin(deg) * this.r);
                 var y = Float(this.y + Math.cos(deg) * this.r);
                 return {x,y};
             }
+            /**根据所给批量角度来获取批量点*/
             getPoints(...v) {
                 if (v && v.length) {
                     let ps = [];
@@ -53,6 +55,18 @@ var Tutil=function($){
                     return ps;
                 }
                 return false;
+            }
+            /**以起点和步进度数来获取批量点.*/
+            getPointsBatch({start=0,step=1,end=360}){
+                let ps = [];
+                while(end>=start){
+                        let deg = (2 * Math.PI / 360) * end;
+                        let x = Float(this.x + Math.sin(deg) * this.r);
+                        let y = Float(this.y + Math.cos(deg) * this.r);
+                        ps.push({x,y});
+                        end-=step;
+                      }
+                return ps;
             }
         }
         return (x, y, r) => new _Arc(x, y, r);

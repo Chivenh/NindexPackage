@@ -29,6 +29,10 @@ define([],function(){
         imgDeal() {
             /**图像处理*/
             ImgDeal("#canvas-5").start();
+        },
+        clock() {
+            /**图像处理*/
+            Clock("#canvas-6").start();
         }
     };
 });

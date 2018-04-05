@@ -47,17 +47,11 @@ var ImgDeal=function () {
                     });
                     return _;
                 };
-                let step=4,sr=0,{colorArcs,_r}=function _(r,s,t){
-                    if(r>200){
-                        return {colorArcs:s,_r:r};
-                    }
+                let step=3,colorArcs=function _(r,s,t){
                     if(r<10){
-                        r+=step;
-                        step=-4;
-                        sr=1;
-                        s=s.concat(false);
+                      return s;
                        }
-                    s=s.concat(Tutil.Arc(t.width*.9*1.5+1,t.height*.9/2,r-sr));
+                    s=s.concat(Tutil.Arc(t.width*.9*1.5+1,t.height*.9/2,r));
                     r-=step;
                     return _(r,s,t);
                 }(200,[],this.img1.img);
@@ -65,19 +59,13 @@ var ImgDeal=function () {
                 setTimeout(()=>{
                     this.getContent();
                 },100);
-                let _rad=1.5;
                 let _time=new Date().getTime();
                 console.time("生成耗时");
                 for(let xyi in arcPoints){
                     yield setTimeout((xy)=>{
-                        if(!xy){
-                                _rad=1;
-                                color=0x3b3a3a;
-                            return colorLoop.next();
-                           }
                         this.ctx.beginPath();
                         this.ctx.fillStyle='#' + color.toString(16).padStart(6, '0');
-                        this.ctx.arc(xy.x,xy.y,_rad,0,2*Math.PI);
+                        this.ctx.arc(xy.x,xy.y,1.3,0,2*Math.PI);
                         this.ctx.fill();
                         this.ctx.closePath();
                         color=color+205;
@@ -95,12 +83,10 @@ var ImgDeal=function () {
                imgData2.points.forEach((j,index) => {
                     imgData2.points[index]=j.map((i) => {
                        if (i[0]==255&&i[1]==255&&i[2]==255&&i[3]===255){
-                                i[4].color="rgba(255,255,255,0)";
+                                i[4].color="rgba(255,255,255,0)";//将第二个图片像素中白色区域转换成透明区域.
                            }else if(i[0]==0&&i[1]==0&&i[2]==0){
-                                        i[0]=48;
-                                        i[1]=64;
-                                        i[2]=134;
-                                    }
+                                i[4].color="rgba(48,64,134,255)";//将像素中黑色区域的颜色改为想要的颜色.
+                            }
                        return i;
                    });
                });
