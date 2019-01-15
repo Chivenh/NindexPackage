@@ -45,9 +45,6 @@ var Index=function (QC) {
                         appId:"101543040",
                         redirectURI:"https://buyer.hjs.56rely.com/view/callback.html"
                     });
-                    setTimeout(function () {
-                        window.close();
-                    },20);
                 });
             }
         }
