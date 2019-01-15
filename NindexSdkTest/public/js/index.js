@@ -33,7 +33,7 @@ var Index=function (QC) {
         },newTabInit:function () {
             if( QC.Login.check()){
                 QC.Login.getMe(function (openId,token) {
-                    infoCon.removeClass("hidden").html(`<b>openId:</b>${openId}`).append("<span>"+`<b>token:</b>${token}`+"</span>");
+                    infoCon.removeClass("hidden").html(`<b>openId:</b>${openId}`).append("<br/><span>"+`<b>token:</b>${token}`+"</span>");
                 });
                 logoutButton.removeClass("hidden").click(function () {
                     QC.Login.signOut();
