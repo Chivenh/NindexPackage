@@ -16,7 +16,10 @@ html(lang="zh-CN")
     body
         h1 登录成功
         p appId: #{appId}
-        p token: #{token}
+        p openId: #{openId}
+        each user in  users
+            li=user.name +':'+ user.code
+
         span#qqLogoutBtn.hidden
             button QQ退出测试
         script(type="text/javascript")
