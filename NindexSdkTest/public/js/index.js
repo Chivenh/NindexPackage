@@ -41,10 +41,11 @@ var Index=function (QC) {
                 });
             }else{
                 loginButton.removeClass("hidden").click(function () {
-                    QC.Login.showPopup({
+                   window.open("/oauth2/auth","_self");
+                    /* QC.Login.showPopup({
                         appId:"101543040",
                         redirectURI:"https://buyer.hjs.56rely.com/view/callback.html"
-                    });
+                    });*/
                 });
             }
         }

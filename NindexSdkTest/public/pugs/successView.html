@@ -1,0 +1,27 @@
+//pug 模板语法
+doctype html
+html(lang="zh-CN")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport",
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        )
+        meta(name="author",content="FlyTiger")
+        meta(name="author",content="FlyTiger")
+        link(rel="shortcut icon",href="/images/step.png")
+        link(rel="stylesheet",type="text/css",href="/style/style.css")
+        script(src="/lib/third-sdk/qc_jssdk.js")
+        script(src="/lib/jquery.min.js")
+        title loginView
+    body
+        h1 登录成功
+        p appId: #{appId}
+        p token: #{token}
+        span#qqLogoutBtn.hidden
+            button QQ退出测试
+        script(type="text/javascript")
+            |  var logoutButton=$("#qqLogoutBtn");
+            |  logoutButton.removeClass("hidden").click(function () {
+            |  QC.Login.signOut();
+            |     window.location.assign("/");
+            |     });
