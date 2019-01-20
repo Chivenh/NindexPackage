@@ -11,7 +11,7 @@ var usersAuth = require('./routes/auth');
 
 var app = express();
 //设置模板引用目录,默认为/views,这里是项目的根目录寻找地址
-app.set("views", ["./public/pugs", "/"]);
+app.set("views", ["./public/pugs", "./public/view"]);
 //加入 pug模板语言在express中使用
 app.set('view engine', 'pug');
 // app.engine('html', require('pug').__express);
