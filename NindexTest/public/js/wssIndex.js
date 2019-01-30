@@ -1,25 +1,27 @@
 /**
  * wssIndex
  */
-(function () {
+(function ($) {
+    let contentContainer = $(".socket-content");
+    //创建socket连接
+   let socket = io("http://127.0.0.1:8901/chat");
+   socket.on("connect",function () {
+       console.info("Socket opened.");
+       socket.emit("Hi, Server!");
+   });
+   socket.on("disconnected",function () {
+       console.info("Socket closed.");
+       console.info(arguments);
+   });
+   socket.on("news",function (data) {
+       console.info(data);
+       contentContainer.html(JSON.stringify(data));
+   });
 
-    var onClose = function() {
-            console.log("Socket closed.");
-        },
-        onMessage = function(data) {
-            console.log("We get signal:");
-            console.log(data);
-        },
-        onError = function() {
-            console.log("We got an error.");
-        },
-    socket = new WebSocket("ws://127.0.0.1:8091/");
-    socket.onopen = function () {
-        console.info("Socket opened.");
-        socket.send("Hi, Server!");
-    };
-    socket.onclose = onClose;
-    socket.onerror = onError;
-    socket.onmessage = onMessage;
-
-}());
+    $(".socketLink").click(function () {
+        var $input=$(this).parent().find("input.form-control");
+        if($input&&$input.length){
+            socket.send($input.val());
+        }
+    });
+}(jQuery));

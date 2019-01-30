@@ -11,18 +11,27 @@ html(lang="zh-CN")
         link(rel="shortcut icon", href="/images/step.png")
         link(rel="bookmark", href="/images/step.png")
         link(rel="stylesheet", type="text/css", href="/lib/bootstrap/css/bootstrap.min.css")
-        link(rel="stylesheet", type="text/css", href="/style/style.css")
+        link(rel="stylesheet", type="text/css", href="/style/wssIndex.css")
         title #{title}
     body
+
         h1 websockets测试
-        div
-            div.pull-left.w50
+
+        div.clearfix
+            div.pull-left.w50.p10
                 div.input-group.input-group-lg
                     input.form-control
-                    span.btn-primary.input-group-btn 发送
-            div.pull-right.w50
+                    span.input-group-btn.socketLink
+                        button.btn.btn-lg.btn-primary 发送
+
+            div.pull-right.w50.p10
                 div.input-group.input-group-lg
                     input.form-control
-                    span.btn-primary.input-group-btn 发送
+                    span.input-group-btn.socketLink
+                        button.btn.btn-lg.btn-primary 发送
+
+        div.p10.socket-content
+
         script(src="/lib/jquery.min.js")
+        script(src="/lib/socket.io/socket.io.js")
         script(src="/js/wssIndex.js")
