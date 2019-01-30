@@ -1,0 +1,7 @@
+/**
+ * wssIndex
+ */
+(function () {
+
+
+}());

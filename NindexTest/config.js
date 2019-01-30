@@ -12,6 +12,8 @@ var config={
         authToken:"https://graph.qq.com/oauth2.0/token",
         //用token去获取对应QQ用户openId
         authMe:"https://graph.qq.com/oauth2.0/me",
+    },wss:{
+
     }
 };
 module.exports=config;

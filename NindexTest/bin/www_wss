@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('nindexsdktest:server');
+var app = require('../app.wss');
+var debug = require('debug')('nindextest:server');
 var http = require('http');
 var config = require("../config");
 /**
