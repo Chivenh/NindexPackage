@@ -10,9 +10,19 @@ html(lang="zh-CN")
         link(rel="icon", href="/images/step.png")
         link(rel="shortcut icon", href="/images/step.png")
         link(rel="bookmark", href="/images/step.png")
+        link(rel="stylesheet", type="text/css", href="/lib/bootstrap/css/bootstrap.min.css")
         link(rel="stylesheet", type="text/css", href="/style/style.css")
         title #{title}
     body
         h1 websockets测试
+        div
+            div.pull-left.w50
+                div.input-group.input-group-lg
+                    input.form-control
+                    span.btn-primary.input-group-btn 发送
+            div.pull-right.w50
+                div.input-group.input-group-lg
+                    input.form-control
+                    span.btn-primary.input-group-btn 发送
         script(src="/lib/jquery.min.js")
         script(src="/js/wssIndex.js")

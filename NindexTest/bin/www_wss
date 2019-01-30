@@ -3,8 +3,9 @@
 /**
  * Module dependencies.
  */
-
-var app = require('../app.wss');
+var socket_io = require('socket.io');
+var app_wss=require('../app.wss');
+var app = app_wss.app;
 var debug = require('debug')('nindextest:server');
 var http = require('http');
 var config = require("../config.wss");
@@ -21,7 +22,10 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+//创建websocket
+var io = socket_io.listen(server);
+//绑定websocket
+app_wss.socketBind(io);
 /**
  * Listen on provided port, on all network interfaces.
  */
