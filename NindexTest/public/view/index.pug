@@ -1,0 +1,32 @@
+//pug 模板语法
+doctype html
+html(lang="zh-CN")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport",
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            )
+        meta(name="author", content="FlyTiger")
+        link(rel="icon", href="/images/step.png")
+        link(rel="shortcut icon", href="/images/step.png")
+        link(rel="bookmark", href="/images/step.png")
+        link(rel="stylesheet", type="text/css", href="/lib/bootstrap/css/bootstrap.min.css")
+        link(rel="stylesheet", type="text/css", href="/style/wssIndex.css")
+        style
+            | .checkbox-index {width:30px;}
+
+        title #{title}
+    body
+        div.container-fluid
+            div.col-md-5.well
+                | 正文1
+                button.dataReload
+                    |  刷新
+                div.container-info
+            div.col-md-5.col-md-offset-1.well
+                | 正文2
+                button.dataReload
+                    |  刷新
+                div.container-info
+
+        script(src="/js/dataTable.js")
